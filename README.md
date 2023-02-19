@@ -1,8 +1,9 @@
 # 智慧校园API
 - scoop：corretto8-jdk
 - scoop：mysql8.0
-- sql/create_table_db.sql
-- 待补充！！！！！！！！！！
+- mvnw：maven wrapper script 
+- run：sql/create_table_db.sql
+- 待补充！！！！！！！！！！！
 
 ## 项目配置使用
 1. src/main/resources/ application.yml 配置mysql等

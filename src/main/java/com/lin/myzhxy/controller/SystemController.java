@@ -9,7 +9,6 @@ import com.lin.myzhxy.service.StudentService;
 import com.lin.myzhxy.service.TeacherService;
 import com.lin.myzhxy.util.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.lin.myzhxy.util.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -32,7 +31,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/sms/system")
 public class SystemController {
-
+    // http://localhost:9001/swagger-ui.html
     // 注入相关 service 层对象依赖！！！！！
     @Autowired
     private AdminService adminService;
@@ -198,7 +197,7 @@ public class SystemController {
     public Result login(@ApiParam("登录参数")@RequestBody LoginForm loginForm, HttpServletRequest request){
         // 验证码校验
         HttpSession session = request.getSession();
-        String sessionVerifiCode = (String) session.getAttribute("verifiCode");
+        String sessionVerifiCode = (String) session.getAttribute("verifiCode"); // verifiedCode  注意核实前端字段。
         // 获取用户验证码
         String loginVerifiCode = loginForm.getVerifiCode();
         if("".equals(sessionVerifiCode) || null == sessionVerifiCode){

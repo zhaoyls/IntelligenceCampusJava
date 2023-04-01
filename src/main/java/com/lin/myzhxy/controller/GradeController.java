@@ -22,12 +22,10 @@ public class GradeController {
     private GradeService gradeService;
 
     // /sms/gradeController/getGrades
-
-
     @ApiOperation("获取全部年级")
     @GetMapping("/getGrades")
     public Result getGrades(){
-        List<Grade> grades =gradeService.getGrades();
+        List<Grade> grades = gradeService.getGrades();
         return Result.ok(grades);
     }
 
@@ -57,21 +55,19 @@ public class GradeController {
 
 
     //sms/gradeController/getGrades/1/3?gradeName=%E4%B8%89
-
     @ApiOperation("根据年级名称模糊查询,带分页")
     @GetMapping("/getGrades/{pageNo}/{pageSize}")
     public Result getGrades(
             @ApiParam("分页查询的页码数") @PathVariable("pageNo") Integer pageNo,
             @ApiParam("分页查询的页大小") @PathVariable("pageSize") Integer pageSize,
             @ApiParam("分页查询模糊匹配的名称") String gradeName
-
-    ){
+    ) {
         // 分页 带条件查询
-        Page<Grade> page =new Page<>(pageNo,pageSize);
-        // 通过服务层
-        IPage<Grade> pageRs=gradeService.getGradeByOpr(page,gradeName);
+        Page<Grade> page = new Page<>(pageNo,pageSize);
+        // 通过服务层查询 （业务）
+        IPage<Grade> pageRs = gradeService.getGradeByOpr(page, gradeName);
 
-        // 封装Result对象并返回
+        // 最后封装Result对象并返回
         return Result.ok(pageRs);
     }
 }

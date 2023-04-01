@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * 全局统一返回结果类
+ * 全局统一返回结果类 （JSON）
  * Result<T>
  */
 @Data

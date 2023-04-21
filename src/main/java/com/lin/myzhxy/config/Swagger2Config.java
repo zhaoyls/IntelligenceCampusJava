@@ -28,8 +28,7 @@ public class Swagger2Config {
 
     @Bean
     public Docket webApiConfig(){
-
-        //添加head参数start
+        // 添加head参数
         List<Parameter> pars = new ArrayList<>();
         ParameterBuilder tokenPar = new ParameterBuilder();
         tokenPar.name("userId")
@@ -50,14 +49,16 @@ public class Swagger2Config {
                 .required(false)
                 .build();
         pars.add(tmpPar.build());
-        //添加head参数end
 
+        // Document 配置
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("webApi")
                 .apiInfo(webApiInfo())
                 .select()
-                //可以测试请求头中：输入token
+                // 可以测试请求头中：输入token
+                // 扫描 ApiOperation 注解生成。
                 //.apis(RequestHandlerSelectors.withClassAnnotation(ApiOperation.class))
+                // 扫描 controller 这个包。
                 .apis(RequestHandlerSelectors.basePackage("com.lin.myzhxy.controller"))
                 //过滤掉admin路径下的所有页面
                 //.paths(Predicates.and(PathSelectors.regex("/sms/.*")))
@@ -68,10 +69,7 @@ public class Swagger2Config {
 
     }
 
-
-
     private ApiInfo webApiInfo(){
-
         return new ApiInfoBuilder()
                 .title("网站-API文档")
                 .description("本文档描述了网站微服务接口定义")
@@ -81,7 +79,6 @@ public class Swagger2Config {
     }
 
     private ApiInfo adminApiInfo(){
-
         return new ApiInfoBuilder()
                 .title("后台管理系统-API文档")
                 .description("本文档描述了后台管理系统微服务接口定义")

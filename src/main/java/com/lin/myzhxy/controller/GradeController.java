@@ -36,9 +36,8 @@ public class GradeController {
     public Result deleteGrade(
             @ApiParam("要删除的所有的grade的id的JSON集合") @RequestBody List<Integer> ids){
 
-        gradeService.removeByIds(ids);
+        gradeService.removeByIds(ids); //  mybatisplus 提供。
         return Result.ok();
-
     }
 
     @ApiOperation("新增或修改grade,有id属性是修改,没有则是增加")

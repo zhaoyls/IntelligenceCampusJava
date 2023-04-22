@@ -23,8 +23,7 @@ public class ClazzController {
     private ClazzService clazzService;
 
 
-    //GET /sms/clazzController/getClazzs
-
+    //GET /sms/clazzController/getClazzs 学生模块用的下拉列表
     @ApiOperation("查询所有班级信息")
     @GetMapping("/getClazzs")
     public Result getClazzs(){
@@ -41,16 +40,13 @@ public class ClazzController {
            @ApiParam("要删除的多个班级的ID的JSON数组")@RequestBody List<Integer> ids
     ){
         clazzService.removeByIds(ids);
-
         return Result.ok();
     }
 
 
 
     //	/sms/clazzController/saveOrUpdateClazz
-
-
-    @ApiOperation("增加或者修改班级信息")
+    @ApiOperation("增加或者修改班级信息 （id区分）")
     @PostMapping("/saveOrUpdateClazz")
     public Result saveOrUpdateClazz(
             @ApiParam("JSON格式的班级信息")@RequestBody Clazz clazz

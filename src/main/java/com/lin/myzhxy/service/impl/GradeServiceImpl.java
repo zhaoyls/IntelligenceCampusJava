@@ -42,6 +42,10 @@ public class GradeServiceImpl extends ServiceImpl<GradeMapper, Grade> implements
         return page;
     }
 
+    /**
+     * 查询年级全部
+     * @return
+     */
     @Override
     public List<Grade> getGrades() {
         return  baseMapper.selectList(null);

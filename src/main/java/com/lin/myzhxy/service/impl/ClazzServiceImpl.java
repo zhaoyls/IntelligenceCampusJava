@@ -31,6 +31,18 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
             queryWrapper.like("name",name);
         }
         queryWrapper.orderByDesc("id");
+//  ORDER BY id DESC
+//==>  Preparing: SELECT COUNT(1) FROM tb_clazz
+//==> Parameters:
+//<==    Columns: COUNT(1)
+//                <==        Row: 7
+//                ==>  Preparing: SELECT id,name,number,introducation,headmaster,telephone,email,grade_name FROM tb_clazz ORDER BY id DESC LIMIT ?,?
+//==> Parameters: 0(Long), 3(Long)
+//                <==    Columns: id, name, number, introducation, headmaster, telephone, email, grade_name
+//                <==        Row: 7, 四年一班, 30, 小赵的三年二班好, 小飞, 13866666666, xiaofei@163.com, 四年级
+//                <==        Row: 6, 三年二班, 30, 小赵的三年二班好, 小赵, 13866666666, xiaozhao@163.com, 三年级
+//                <==        Row: 5, 三年一班, 30, 小花的三年一班好, 小花, 13866666666, xiaohua@163.com, 三年级
+//                <==      Total: 3
         Page<Clazz> clazzPage = baseMapper.selectPage(pageParam, queryWrapper);
 
         return clazzPage;

@@ -62,7 +62,6 @@ public class ClazzController {
 
 
     // sms/clazzController/getClazzsByOpr/1/3?gradeName=&name=
-
     @ApiOperation("分页带条件查询班级信息")
     @GetMapping("/getClazzsByOpr/{pageNo}/{pageSize}")
     public Result getClazzByOpr(
@@ -70,7 +69,8 @@ public class ClazzController {
             @ApiParam("分页查询页大小")@PathVariable("pageSize") Integer pageSize,
             @ApiParam("分页查询的查询条件") Clazz clazz
     ){
-        Page<Clazz> page =new Page<>(pageNo,pageSize);
+        // 设置分页信息， 需要先注入clazzService。
+        Page<Clazz> page = new Page<>(pageNo,pageSize);
 
         IPage<Clazz> iPage=clazzService.getClazzsByOpr(page,clazz);
 

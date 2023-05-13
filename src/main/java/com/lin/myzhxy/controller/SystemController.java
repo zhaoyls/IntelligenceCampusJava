@@ -123,21 +123,24 @@ public class SystemController {
 
 
     // POST /sms/system/headerImgUpload
+    // 请求载荷中的 multipartFile, RequestPart处理接收的multipart/form-data提交的方法上。
     @ApiOperation("文件上传统一入口")
     @PostMapping("/headerImgUpload")
     public Result headerImgUpload(
            @ApiParam("头像文件") @RequestPart("multipartFile")  MultipartFile multipartFile
-    ,
-           HttpServletRequest request
+            , HttpServletRequest request
     ){
 
+        // 解决文件名冲突
         String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
         String originalFilename = multipartFile.getOriginalFilename();
         int i = originalFilename.lastIndexOf(".");
-        String newFileName =uuid.concat(originalFilename.substring(i));
+        String newFileName = uuid.concat(originalFilename.substring(i));
 
         // 保存文件 将文件发送到第三方/独立的图片服务器上,
-        String portraitPath="C:/code/myzhxy/target/classes/public/upload/".concat(newFileName);
+//        request.getServletContext().getRealPath("public/upload");
+//        String portraitPath = "C:/xxx/myzhxy/target/classes/public/upload/"+newFileName;
+        String portraitPath = "C:/xxx/myzhxy/target/classes/public/upload/".concat(newFileName);
         try {
             multipartFile.transferTo(new File(portraitPath));
         } catch (IOException e) {
@@ -146,7 +149,7 @@ public class SystemController {
 
 
         // 响应图片的路径
-        String path="upload/".concat(newFileName);
+        String path = "upload/".concat(newFileName);
         return Result.ok(path);
     }
 

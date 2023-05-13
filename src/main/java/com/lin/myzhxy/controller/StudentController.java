@@ -57,10 +57,10 @@ public class StudentController {
         @ApiParam("页大小") @PathVariable("pageSize") Integer pageSize,
         @ApiParam("查询的条件") Student student
     ){
-        //分页信息封装Page对象
-        Page<Student> pageParam =new Page(pageNo,pageSize);
-        // 进行查询
-        IPage<Student> studentPage =studentService.getStudentByOpr(pageParam,student);
+        // 分页信息封装Page对象
+        Page<Student> pageParam = new Page(pageNo,pageSize);
+        // 进行查询 （POJO类）
+        IPage<Student> studentPage = studentService.getStudentByOpr(pageParam,student);
         // 封装Result返回
         return Result.ok(studentPage);
     }

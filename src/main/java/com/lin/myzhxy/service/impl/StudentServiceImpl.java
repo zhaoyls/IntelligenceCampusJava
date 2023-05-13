@@ -39,13 +39,22 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
         return baseMapper.selectOne(queryWrapper);
     }
 
+    /**
+     *
+     * @param pageParam
+     * @param student
+     * @return
+     */
     @Override
     public IPage<Student> getStudentByOpr(Page<Student> pageParam, Student student) {
+//        System.out.println(pageParam);
+//        System.out.println(student);
         QueryWrapper<Student> studentQueryWrapper =new QueryWrapper<>();
         if(!StringUtils.isEmpty(student.getName())){
             studentQueryWrapper.like("name",student.getName());
         }
         if(!StringUtils.isEmpty(student.getClazzName())){
+            // 注意表里的字段是clazz_name 带下划线。
             studentQueryWrapper.like("clazz_name",student.getClazzName());
         }
         studentQueryWrapper.orderByDesc("id");

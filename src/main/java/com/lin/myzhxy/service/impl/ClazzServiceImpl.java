@@ -20,7 +20,7 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
 
     @Override
     public IPage<Clazz> getClazzsByOpr(Page<Clazz> pageParam, Clazz clazz) {
-        QueryWrapper<Clazz> queryWrapper=new QueryWrapper<>();
+        QueryWrapper<Clazz> queryWrapper = new QueryWrapper<>();
         String gradeName = clazz.getGradeName();
         if (!StringUtils.isEmpty(gradeName)) {
             queryWrapper.like("grade_name",gradeName);
@@ -31,6 +31,7 @@ public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, Clazz> implements
             queryWrapper.like("name",name);
         }
         queryWrapper.orderByDesc("id");
+// 生成的语句终端。
 //  ORDER BY id DESC
 //==>  Preparing: SELECT COUNT(1) FROM tb_clazz
 //==> Parameters:

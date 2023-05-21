@@ -32,7 +32,7 @@ import java.util.UUID;
 @RequestMapping("/sms/system")
 public class SystemController {
     // http://localhost:9001/swagger-ui.html
-    // 注入相关 service 层对象依赖！！！！！
+    // 注入相关 service 层对象依赖。
     @Autowired
     private AdminService adminService;
     @Autowired
@@ -53,7 +53,6 @@ public class SystemController {
                 Result OK data= null
 
     * */
-
     @ApiOperation("更新用户密码的处理器")
     @PostMapping("/updatePwd/{oldPwd}/{newPwd}")
     public Result updatePwd(
@@ -62,22 +61,25 @@ public class SystemController {
             @ApiParam("新密码") @PathVariable("newPwd") String newPwd
     ){
         boolean expiration = JwtHelper.isExpiration(token);
+        // 检查 token 是否过期
         if (expiration) {
-            // token过期
             return Result.fail().message("token失效,请重新登录后修改密码");
         }
         // 获取用户ID和用类型
         Long userId = JwtHelper.getUserId(token);
         Integer userType = JwtHelper.getUserType(token);
 
-        oldPwd= MD5.encrypt(oldPwd);
+        oldPwd = MD5.encrypt(oldPwd);
         newPwd= MD5.encrypt(newPwd);
 
         switch (userType) {
+            // 未放入service处理。已集成方法就不写了。
             case 1:
+                // 管理员
                 QueryWrapper<Admin> queryWrapper1=new QueryWrapper<>();
                 queryWrapper1.eq("id",userId.intValue());
                 queryWrapper1.eq("password",oldPwd);
+
                 Admin admin = adminService.getOne(queryWrapper1);
                 if (admin != null){
                     // 修改
@@ -89,6 +91,7 @@ public class SystemController {
                 break;
 
             case 2:
+                // 学生
                 QueryWrapper<Student> queryWrapper2=new QueryWrapper<>();
                 queryWrapper2.eq("id",userId.intValue());
                 queryWrapper2.eq("password",oldPwd);
@@ -102,6 +105,7 @@ public class SystemController {
                 }
                 break;
             case 3:
+                // 教师
                 QueryWrapper<Teacher> queryWrapper3=new QueryWrapper<>();
                 queryWrapper3.eq("id",userId.intValue());
                 queryWrapper3.eq("password",oldPwd);

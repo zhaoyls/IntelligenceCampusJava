@@ -35,7 +35,7 @@ public class TeacherController {
             @ApiParam("页大小") @PathVariable("pageSize") Integer pageSize ,
             @ApiParam("查询条件") Teacher teacher
     ){
-        Page<Teacher> paraParam =new Page<>(pageNo,pageSize);
+        Page<Teacher> paraParam = new Page<>(pageNo,pageSize);
 
         IPage<Teacher> page = teacherService.getTeachersByOpr(paraParam,teacher);
 
@@ -66,7 +66,7 @@ public class TeacherController {
     /*
     * DELETE sms/teacherController/deleteTeacher
     *   请求的数据 JSON 数组 [1,2,3]
-    *   响应Result data =null  OK
+    *   响应Result data = null  OK
     *
     * */
     @ApiOperation("删除单个或者多个教师信息")

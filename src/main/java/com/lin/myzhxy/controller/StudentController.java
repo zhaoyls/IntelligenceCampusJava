@@ -19,7 +19,7 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-    // DELETE
+
     //	http://localhost:9001/sms/studentController/delStudentById
     @ApiOperation("删除单个或者多个学生信息")
     @DeleteMapping("/delStudentById")
@@ -32,16 +32,17 @@ public class StudentController {
 
 
     // POST  http://localhost:9002/sms/studentController/addOrUpdateStudent
-
     @ApiOperation("保存或者修改学生信息")
     @PostMapping("/addOrUpdateStudent")
     public Result addOrUpdateStudent(
             @ApiParam("要保存或修改的学生JSON")@RequestBody  Student student
     ){
+        // 新增的时候需要加密密码。
         Integer id = student.getId();
-        if (null == id || 0 ==id) {
+        if (null == id || 0 == id) {
             student.setPassword(MD5.encrypt(student.getPassword()));
         }
+
         studentService.saveOrUpdate(student);
         return Result.ok();
     }

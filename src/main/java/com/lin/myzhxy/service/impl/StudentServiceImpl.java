@@ -13,9 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-/**
-
- */
 @Service("stuService")
 @Transactional
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {

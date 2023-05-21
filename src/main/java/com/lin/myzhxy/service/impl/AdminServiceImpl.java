@@ -18,13 +18,12 @@ import org.springframework.util.StringUtils;
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {
     @Override
     public Admin login(LoginForm loginForm) {
-        // QueryWrapper用于生成 where 条件筛选
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("name",loginForm.getUsername());
         queryWrapper.eq("password", MD5.encrypt(loginForm.getPassword()));
 
         Admin admin = baseMapper.selectOne(queryWrapper);
-        return admin; // 查询完向上 controller 层返回即可
+        return admin;
     }
 
     @Override

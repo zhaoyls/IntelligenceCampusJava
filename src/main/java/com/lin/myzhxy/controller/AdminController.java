@@ -22,7 +22,6 @@ public class AdminController {
     @Autowired
     private AdminService adminService ;
 
-    // GET
     //	http://localhost:9002/sms/adminController/getAllAdmin/1/3?    adminName=a
     @ApiOperation("分页带条件查询管理员信息")
     @GetMapping("/getAllAdmin/{pageNo}/{pageSize}")
@@ -31,13 +30,14 @@ public class AdminController {
             @ApiParam("页大小") @PathVariable("pageSize") Integer pageSize,
             @ApiParam("管理员名字") String adminName
     ){
-        Page<Admin> pageParam =new Page<Admin>(pageNo,pageSize);
-
-        IPage<Admin> iPage=adminService.getAdminsByOpr(pageParam,adminName);
+        // 分页
+        Page<Admin> pageParam = new Page<Admin>(pageNo,pageSize);
+        // 业务
+        IPage<Admin> iPage = adminService.getAdminsByOpr(pageParam,adminName);
+        // 去吧。
         return Result.ok(iPage);
     }
 
-    //POST
     //	http://localhost:9002/sms/adminController/saveOrUpdateAdmin  admin
     @ApiOperation("增加或修改管理员信息")
     @PostMapping("/saveOrUpdateAdmin")
@@ -53,7 +53,6 @@ public class AdminController {
 
     }
 
-    // DELETE
     //	http://localhost:9002/sms/adminController/deleteAdmin List<Integer> ids
     @ApiOperation("删除单个或者多个管理员信息")
     @DeleteMapping("/deleteAdmin")
